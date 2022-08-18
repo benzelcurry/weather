@@ -480,17 +480,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getWeather)
 /* harmony export */ });
+/* harmony import */ var _cleanData_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+
+
 // Fetches weather data and posts temp to screen
 
 async function getWeather(test) {
     const response = await fetch('http://api.openweathermap.org/data/2.5/weather?q=London&APPID=aaf3fe91467b4ee119231483d81d2f44', {mode: 'cors'});
     const weatherData = await response.json();
+    const neededData = (0,_cleanData_js__WEBPACK_IMPORTED_MODULE_0__["default"])(weatherData);
 
-    console.log(weatherData);
-    console.log(weatherData.main);
-    console.log(weatherData.main.temp);
+    console.log(neededData);
+}
 
-    test.innerText = weatherData.main.temp;
+/***/ }),
+/* 12 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ cleanData)
+/* harmony export */ });
+// Cleans the data returned from OpenWeather API and returns a simplified object that only contains necessary data
+
+/* DEFAULT UNITS:
+Temperature: Kelvin
+Humidity: %
+Wind speed: m/s
+*/
+
+function cleanData(data) {
+    const weather = data.weather[0].description;
+    const temperature = data.main.temp;
+    const feelsLike = data.main.feels_like;
+    const humidity = data.main.humidity;
+    const wind = data.wind.speed;
+    
+    return {weather, temperature, feelsLike, humidity, wind};
 }
 
 /***/ })
@@ -573,6 +599,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _getWeather_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _cleanData_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+
 
 
 
