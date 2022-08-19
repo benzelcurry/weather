@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url(photos/clear-night.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 40px;
+    margin: 20px;
+    gap: 10px;
+    background-color: #2b272771;
+    color: white;
+}
+
+.search {
+    width: 200px;
+    height: 20px;
+}
+
+.search:focus {
+    outline: none;
+}

@@ -7,11 +7,12 @@ Wind speed: m/s
 */
 
 export default function cleanData(data) {
+    const time = data.dt;
     const weather = data.weather[0].description;
     const temperature = data.main.temp;
     const feelsLike = data.main.feels_like;
     const humidity = data.main.humidity;
     const wind = data.wind.speed;
     
-    return {weather, temperature, feelsLike, humidity, wind};
+    return {time, weather, temperature, feelsLike, humidity, wind};
 }
