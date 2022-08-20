@@ -13,8 +13,6 @@ export default async function getWeather(location, time, weather, temperature, f
     const realTime = new Date(unixTime * 1000);
     const fiveDays = forecastCleaner(forecastData);
 
-    forecastCleaner(forecastData);
-
     console.log(fiveDays);
     console.log(weatherData);
     console.log(neededData);
@@ -26,7 +24,11 @@ export default async function getWeather(location, time, weather, temperature, f
     humidity.textContent = `Humidity: ${neededData.humidity}%`;
     wind.textContent = `Wind speed: ${(neededData.wind * 2.236936).toFixed(1)} mph`;
 
-    // ADD FUNCTIONALITY FOR GETTING/DISPLAYING FORECAST
+    // ADD FUNCTIONALITY FOR GETTING/DISPLAYING FORECAST;
+    // FINISH DISPLAY OF FORECAST; ORGANIZE IT BETTER
+    const tomorrow = document.querySelector('.tomorrow');
+
+    tomorrow.innerText = `${fiveDays[7][0]}\n${fiveDays[7][1]}`;
 }
 
 // Capitalizes the first letter of the string returned from OpenWeather API; for use with any string that may be returned

@@ -543,8 +543,6 @@ async function getWeather(location, time, weather, temperature, feelsLike, humid
     const realTime = new Date(unixTime * 1000);
     const fiveDays = (0,_forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__["default"])(forecastData);
 
-    (0,_forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__["default"])(forecastData);
-
     console.log(fiveDays);
     console.log(weatherData);
     console.log(neededData);
@@ -556,7 +554,11 @@ async function getWeather(location, time, weather, temperature, feelsLike, humid
     humidity.textContent = `Humidity: ${neededData.humidity}%`;
     wind.textContent = `Wind speed: ${(neededData.wind * 2.236936).toFixed(1)} mph`;
 
-    // ADD FUNCTIONALITY FOR GETTING/DISPLAYING FORECAST
+    // ADD FUNCTIONALITY FOR GETTING/DISPLAYING FORECAST;
+    // FINISH DISPLAY OF FORECAST; ORGANIZE IT BETTER
+    const tomorrow = document.querySelector('.tomorrow');
+
+    tomorrow.innerText = `${fiveDays[7][0]}\n${fiveDays[7][1]}`;
 }
 
 // Capitalizes the first letter of the string returned from OpenWeather API; for use with any string that may be returned
@@ -605,7 +607,15 @@ function forecastCleaner(data) {
     let fiveDayForecast = {};
 
     for (let i = 7; i < 40; i += 8) {
-        fiveDayForecast[i] = (data.list[i]);
+        let array = [];
+
+        const time = data.list[i].dt;
+        const weather = data.list[i].weather[0].description;
+        const temperature = data.list[i].main.temp;
+
+        array.push(time, weather, temperature)
+
+        fiveDayForecast[i] = array;
     }
 
     return fiveDayForecast;
