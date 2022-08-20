@@ -527,6 +527,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ getWeather)
 /* harmony export */ });
 /* harmony import */ var _cleanData_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+
 
 
 // Fetches weather data and posts temp to screen
@@ -539,8 +541,11 @@ async function getWeather(location, time, weather, temperature, feelsLike, humid
     const neededData = (0,_cleanData_js__WEBPACK_IMPORTED_MODULE_0__["default"])(weatherData);
     const unixTime = neededData.time;
     const realTime = new Date(unixTime * 1000);
+    const fiveDays = (0,_forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__["default"])(forecastData);
 
-    console.log(forecastData);
+    (0,_forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__["default"])(forecastData);
+
+    console.log(fiveDays);
     console.log(weatherData);
     console.log(neededData);
 
@@ -585,6 +590,26 @@ function cleanData(data) {
     
     return {time, weather, temperature, feelsLike, humidity, wind};
 }
+
+/***/ }),
+/* 15 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ forecastCleaner)
+/* harmony export */ });
+// Cleans the forecast data and returns the five-day forecast for every 24 hours from its call
+
+function forecastCleaner(data) {
+    let fiveDayForecast = {};
+
+    for (let i = 7; i < 40; i += 8) {
+        fiveDayForecast[i] = (data.list[i]);
+    }
+
+    return fiveDayForecast;
+};
 
 /***/ })
 /******/ 	]);
