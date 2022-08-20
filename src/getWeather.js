@@ -1,4 +1,5 @@
 import cleanData from './cleanData.js';
+import forecastCleaner from  './forecastCleaner.js';
 
 // Fetches weather data and posts temp to screen
 
@@ -10,8 +11,11 @@ export default async function getWeather(location, time, weather, temperature, f
     const neededData = cleanData(weatherData);
     const unixTime = neededData.time;
     const realTime = new Date(unixTime * 1000);
+    const fiveDays = forecastCleaner(forecastData);
 
-    console.log(forecastData);
+    forecastCleaner(forecastData);
+
+    console.log(fiveDays);
     console.log(weatherData);
     console.log(neededData);
 
