@@ -13,13 +13,13 @@ const wind = document.querySelector('.wind');
 const search = document.querySelector('.search');
 let location = 'Portland';
 
-locationDisplay.textContent = `Location: ${location}`;
+locationDisplay.textContent = location;
 
 search.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') { 
         location = search.value;
         search.value = "";
-        locationDisplay.textContent = `Location: ${location}`;
+        locationDisplay.textContent = location;
         getWeather(location, time, weather, temperature, feelsLike, humidity, wind);
     }
 });

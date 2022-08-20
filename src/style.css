@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -15,18 +17,48 @@ body {
     display: flex;
     flex-direction: column;
     width: 400px;
-    padding: 40px;
-    margin: 20px;
-    gap: 10px;
+    height: 100%;
     background-color: #2b272771;
     color: white;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
 }
 
 .search {
     width: 200px;
     height: 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 1rem;
+}
+
+.search::placeholder {
+    color: white;
+    font-size: 1rem;
 }
 
 .search:focus {
     outline: none;
+}
+
+/* Main container starts here */
+.main-container {
+    color: white;
+    padding: 40px;
+}
+
+.location {
+    background-color: #2b272771;
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 5px;
+    text-align: center;
 }

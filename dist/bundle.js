@@ -356,7 +356,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);"]);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    width: 100vw;\n    height: 100vh;\n    margin: 0;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    font-family: 'Roboto', Arial, Helvetica, sans-serif;\n}\n\n.weather-container {\n    display: flex;\n    flex-direction: column;\n    width: 400px;\n    padding: 40px;\n    margin: 20px;\n    gap: 10px;\n    background-color: #2b272771;\n    color: white;\n}\n\n.search {\n    width: 200px;\n    height: 20px;\n}\n\n.search:focus {\n    outline: none;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    display: grid;\n    grid-template-columns: repeat(2, auto);\n    width: 100vw;\n    height: 100vh;\n    margin: 0;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    font-family: 'Roboto', Arial, Helvetica, sans-serif;\n}\n\n.weather-container {\n    display: flex;\n    flex-direction: column;\n    width: 400px;\n    height: 100%;\n    background-color: #2b272771;\n    color: white;\n}\n\n.data-container {\n    display: flex;\n    flex-direction: column;\n    gap: 20px;\n    padding: 40px;\n}\n\n.search {\n    width: 200px;\n    height: 20px;\n    background: none;\n    border: none;\n    border-bottom: 2px solid white;\n    color: white;\n    font-size: 1rem;\n}\n\n.search::placeholder {\n    color: white;\n    font-size: 1rem;\n}\n\n.search:focus {\n    outline: none;\n}\n\n/* Main container starts here */\n.main-container {\n    color: white;\n    padding: 40px;\n}\n\n.location {\n    background-color: #2b272771;\n    font-size: 60px;\n    font-weight: bold;\n    letter-spacing: 2px;\n    padding: 5px;\n    text-align: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -534,10 +534,13 @@ __webpack_require__.r(__webpack_exports__);
 async function getWeather(location, time, weather, temperature, feelsLike, humidity, wind) {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
     const weatherData = await response.json();
+    const forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
+    const forecastData = await forecast.json();
     const neededData = (0,_cleanData_js__WEBPACK_IMPORTED_MODULE_0__["default"])(weatherData);
     const unixTime = neededData.time;
     const realTime = new Date(unixTime * 1000);
 
+    console.log(forecastData);
     console.log(weatherData);
     console.log(neededData);
 
@@ -739,13 +742,13 @@ const wind = document.querySelector('.wind');
 const search = document.querySelector('.search');
 let location = 'Portland';
 
-locationDisplay.textContent = `Location: ${location}`;
+locationDisplay.textContent = location;
 
 search.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') { 
         location = search.value;
         search.value = "";
-        locationDisplay.textContent = `Location: ${location}`;
+        locationDisplay.textContent = location;
         (0,_getWeather_js__WEBPACK_IMPORTED_MODULE_1__["default"])(location, time, weather, temperature, feelsLike, humidity, wind);
     }
 });
