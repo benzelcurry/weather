@@ -356,7 +356,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);"]);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    display: grid;\n    grid-template-columns: repeat(2, auto);\n    width: 100vw;\n    height: 100vh;\n    margin: 0;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    font-family: 'Roboto', Arial, Helvetica, sans-serif;\n}\n\n.weather-container {\n    display: flex;\n    flex-direction: column;\n    width: 400px;\n    height: 100%;\n    background-color: #2b272771;\n    color: white;\n}\n\n.data-container {\n    display: flex;\n    flex-direction: column;\n    gap: 20px;\n    padding: 40px;\n}\n\n.search {\n    width: 200px;\n    height: 20px;\n    background: none;\n    border: none;\n    border-bottom: 2px solid white;\n    color: white;\n    font-size: 1rem;\n}\n\n.search::placeholder {\n    color: white;\n    font-size: 1rem;\n}\n\n.search:focus {\n    outline: none;\n}\n\n/* Main container starts here */\n.main-container {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    padding: 40px;\n    background-color: #2b272771;\n    margin: 40px;\n}\n\n.location {\n    font-size: 60px;\n    font-weight: bold;\n    letter-spacing: 2px;\n    padding: 5px;\n    text-align: center;\n}\n\n.forecast {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n}\n\n.day {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 10px;\n    flex-grow: 1;\n}\n\n.time {\n    font-size: 32px;\n}\n\n.tomorrow {\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\n\n.svg {\n    filter: invert(100%) sepia(9%) saturate(3%) hue-rotate(10deg) brightness(120%) contrast(100%);\n    height: 70px;\n    width: auto;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    display: grid;\n    grid-template-columns: 1fr 4fr;\n    width: 100vw;\n    height: 100vh;\n    margin: 0;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    font-family: 'Roboto', Arial, Helvetica, sans-serif;\n}\n\n.weather-container {\n    display: flex;\n    flex-direction: column;\n    width: 400px;\n    height: 100%;\n    background-color: #2b272771;\n    color: white;\n}\n\n.data-container {\n    display: flex;\n    flex-direction: column;\n    gap: 20px;\n    padding: 40px;\n}\n\n.search {\n    width: 200px;\n    height: 20px;\n    background: none;\n    border: none;\n    border-bottom: 2px solid white;\n    color: white;\n    font-size: 1rem;\n}\n\n.search::placeholder {\n    color: white;\n    font-size: 1rem;\n}\n\n.search:focus {\n    outline: none;\n}\n\n/* Main container starts here */\n.main-container {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    align-self: center;\n    justify-self: center;\n    color: white;\n    padding: 40px;\n    background-color: #2b272771;\n    margin: 40px;\n    height: 500px;\n    min-width: 300px;\n    flex-grow: 1;\n}\n\n.location {\n    font-size: 60px;\n    font-weight: bold;\n    letter-spacing: 2px;\n    padding: 5px;\n    text-align: center;\n}\n\n.forecast {\n    display: flex;\n    flex-direction: column;\n    min-width: 300px;\n    gap: 20px;\n}\n\n.day {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 10px;\n    flex-grow: 1;\n}\n\n.day-forecast {\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\n\n.time {\n    font-size: 32px;\n}\n\n.tomorrow {\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\n\n.svg {\n    filter: invert(100%) sepia(9%) saturate(3%) hue-rotate(10deg) brightness(120%) contrast(100%);\n    height: 70px;\n    width: auto;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -559,10 +559,31 @@ async function getWeather(location, time, weather, temperature, feelsLike, humid
     // ADD FUNCTIONALITY FOR GETTING/DISPLAYING FORECAST;
     // FINISH DISPLAY OF FORECAST; ORGANIZE IT BETTER
     const tomorrow = document.querySelector('.tomorrow');
+    const tomorrowIcon = document.querySelector('.tomorrow-icon');
+    const twoDays = document.querySelector('.two-days');
+    const twoIcon = document.querySelector('.two-icon');
+    const threeDays = document.querySelector('.three-days');
+    const threeIcon = document.querySelector('.three-icon');
+    const fourDays = document.querySelector('.four-days');
+    const fourIcon = document.querySelector('.four-icon');
+    const fifthDay = document.querySelector('.five-days');
+    const fifthIcon = document.querySelector('.five-icon');
 
     
     tomorrow.innerText = `${fiveDays[7][1]}\n${(1.8 * (fiveDays[7][2] - 273) + 32).toFixed(1)}°F`;
-    (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(tomorrow, fiveDays[7]);
+    (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(tomorrowIcon, fiveDays[7]);
+
+    twoDays.innerText = `${fiveDays[15][1]}\n${(1.8 * (fiveDays[15][2] - 273) + 32).toFixed(1)}°F`;
+    (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(twoIcon, fiveDays[15]);
+
+    threeDays.innerText = `${fiveDays[23][1]}\n${(1.8 * (fiveDays[23][2] - 273) + 32).toFixed(1)}°F`;
+    (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(threeIcon, fiveDays[23]);
+
+    fourDays.innerText = `${fiveDays[31][1]}\n${(1.8 * (fiveDays[31][2] - 273) + 32).toFixed(1)}°F`;
+    (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(fourIcon, fiveDays[31]);
+
+    fifthDay.innerText = `${fiveDays[39][1]}\n${(1.8 * (fiveDays[39][2] - 273) + 32).toFixed(1)}°F`;
+    (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(fifthIcon, fiveDays[39]);
 }
 
 // Capitalizes the first letter of the string returned from OpenWeather API; for use with any string that may be returned
@@ -635,9 +656,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _photos_sunny_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
 /* harmony import */ var _photos_partly_cloudy_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
-/* harmony import */ var _photos_cloudy_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
-/* harmony import */ var _photos_rain_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
-/* harmony import */ var _photos_snow_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
+/* harmony import */ var _photos_cloudy_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19);
+/* harmony import */ var _photos_rain_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
+/* harmony import */ var _photos_snow_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21);
 // Takes forecast data as an argument and determines which weather icons to display
 
 
@@ -667,18 +688,27 @@ function chooseIcon(day, forecast) {
     snow.src = _photos_snow_svg__WEBPACK_IMPORTED_MODULE_4__;
     snow.classList.add('svg');
 
-    if (forecast[1] === 'clear sky') {
-        day.appendChild(sunny);
-    } else if (forecast[1] === 'few clouds' || forecast[1] === 'broken clouds') {
-        day.appendChild(partlyCloudy);
-    } else if (forecast[1] === 'scattered clouds' || forecast[1] === 'mist') {
-        day.appendChild(cloudy);
-    } else if (forecast[1] === 'shower rain' || forecast[1] === 'rain' || forecast[1] === thunderstorm) {
-        day.appendChild(rain);
-    } else if (forecast[1] === 'snow') {
-        day.appendChild(snow);
+    if (day.hasChildNodes() === true) {
+        day.removeChild(day.lastChild);
+        chooseIcon();
     } else {
-        day.appendChild(partlyCloudy);
+        chooseIcon();
+    }
+
+    function chooseIcon() {
+        if (forecast[1] === 'clear sky') {
+            day.appendChild(sunny);
+        } else if (forecast[1] === 'few clouds' || forecast[1] === 'broken clouds') {
+            day.appendChild(partlyCloudy);
+        } else if (forecast[1] === 'scattered clouds' || forecast[1] === 'mist') {
+            day.appendChild(cloudy);
+        } else if (forecast[1].includes('rain') || forecast[1] === thunderstorm) {
+            day.appendChild(rain);
+        } else if (forecast[1] === 'snow') {
+            day.appendChild(snow);
+        } else {
+            day.appendChild(partlyCloudy);
+        }
     }
 }
 
@@ -698,19 +728,19 @@ module.exports = __webpack_require__.p + "dcbed8e99e13007a03b9.svg";
 /* 19 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "8d849ca691d1c33dd659.svg";
+module.exports = __webpack_require__.p + "3c96b249839e3cdf0bb8.svg";
 
 /***/ }),
 /* 20 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "e9b7bad4e9109e54b4d5.svg";
+module.exports = __webpack_require__.p + "8d849ca691d1c33dd659.svg";
 
 /***/ }),
 /* 21 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "3c96b249839e3cdf0bb8.svg";
+module.exports = __webpack_require__.p + "e9b7bad4e9109e54b4d5.svg";
 
 /***/ })
 /******/ 	]);
