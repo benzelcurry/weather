@@ -1,5 +1,6 @@
 import cleanData from './cleanData.js';
 import forecastCleaner from  './forecastCleaner.js';
+import chooseIcon from './chooseIcon.js';
 
 // Fetches weather data and posts temp to screen
 
@@ -28,7 +29,9 @@ export default async function getWeather(location, time, weather, temperature, f
     // FINISH DISPLAY OF FORECAST; ORGANIZE IT BETTER
     const tomorrow = document.querySelector('.tomorrow');
 
-    tomorrow.innerText = `${fiveDays[7][0]}\n${fiveDays[7][1]}`;
+    
+    tomorrow.innerText = `${fiveDays[7][1]}\n${(1.8 * (fiveDays[7][2] - 273) + 32).toFixed(1)}°F`;
+    chooseIcon(tomorrow, fiveDays[7]);
 }
 
 // Capitalizes the first letter of the string returned from OpenWeather API; for use with any string that may be returned
