@@ -27,17 +27,26 @@ export default function chooseIcon(day, forecast) {
     snow.src = Snow;
     snow.classList.add('svg');
 
-    if (forecast[1] === 'clear sky') {
-        day.appendChild(sunny);
-    } else if (forecast[1] === 'few clouds' || forecast[1] === 'broken clouds') {
-        day.appendChild(partlyCloudy);
-    } else if (forecast[1] === 'scattered clouds' || forecast[1] === 'mist') {
-        day.appendChild(cloudy);
-    } else if (forecast[1] === 'shower rain' || forecast[1] === 'rain' || forecast[1] === thunderstorm) {
-        day.appendChild(rain);
-    } else if (forecast[1] === 'snow') {
-        day.appendChild(snow);
+    if (day.hasChildNodes() === true) {
+        day.removeChild(day.lastChild);
+        chooseIcon();
     } else {
-        day.appendChild(partlyCloudy);
+        chooseIcon();
+    }
+
+    function chooseIcon() {
+        if (forecast[1] === 'clear sky') {
+            day.appendChild(sunny);
+        } else if (forecast[1] === 'few clouds' || forecast[1] === 'broken clouds') {
+            day.appendChild(partlyCloudy);
+        } else if (forecast[1] === 'scattered clouds' || forecast[1] === 'mist') {
+            day.appendChild(cloudy);
+        } else if (forecast[1].includes('rain') || forecast[1] === thunderstorm) {
+            day.appendChild(rain);
+        } else if (forecast[1] === 'snow') {
+            day.appendChild(snow);
+        } else {
+            day.appendChild(partlyCloudy);
+        }
     }
 }
