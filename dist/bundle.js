@@ -538,9 +538,9 @@ __webpack_require__.r(__webpack_exports__);
 // Fetches weather data and posts temp to screen
 
 async function getWeather(location, time, weather, temperature, feelsLike, humidity, wind) {
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
     const weatherData = await response.json();
-    const forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
+    const forecast = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
     const forecastData = await forecast.json();
     const neededData = (0,_cleanData_js__WEBPACK_IMPORTED_MODULE_0__["default"])(weatherData);
     let unixTime = neededData.time;
