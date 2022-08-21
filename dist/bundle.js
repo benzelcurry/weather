@@ -529,6 +529,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cleanData_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 /* harmony import */ var _chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _changeBackground_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
+
 
 
 
@@ -541,23 +543,21 @@ async function getWeather(location, time, weather, temperature, feelsLike, humid
     const forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=aaf3fe91467b4ee119231483d81d2f44`, {mode: 'cors'});
     const forecastData = await forecast.json();
     const neededData = (0,_cleanData_js__WEBPACK_IMPORTED_MODULE_0__["default"])(weatherData);
-    const unixTime = neededData.time;
-    const realTime = new Date(unixTime * 1000);
+    let unixTime = neededData.time;
+    let realTime = new Date(unixTime * 1000);
     const fiveDays = (0,_forecastCleaner_js__WEBPACK_IMPORTED_MODULE_1__["default"])(forecastData);
+    const body = document.querySelector('body');
 
-    console.log(fiveDays);
-    console.log(weatherData);
-    console.log(neededData);
-
-    time.textContent = `Last updated: ${realTime.toLocaleTimeString("en-us")}`;
+    time.textContent = `Last updated: ${realTime.toLocaleTimeString("en-us")} (System time)`;
     weather.textContent = `Weather: ${capitalizeLetter(neededData.weather)}`;
     temperature.textContent = `Temperature: ${(1.8 * (neededData.temperature - 273) + 32).toFixed(1)}°F`;
     feelsLike.textContent = `Feels like: ${(1.8 * (neededData.feelsLike - 273) + 32).toFixed(1)}°F`;
     humidity.textContent = `Humidity: ${neededData.humidity}%`;
     wind.textContent = `Wind speed: ${(neededData.wind * 2.236936).toFixed(1)} mph`;
 
-    // ADD FUNCTIONALITY FOR GETTING/DISPLAYING FORECAST;
-    // FINISH DISPLAY OF FORECAST; ORGANIZE IT BETTER
+    (0,_changeBackground_js__WEBPACK_IMPORTED_MODULE_3__["default"])(body, neededData.weather);
+
+    // Beginning of forecast section
     const tomorrow = document.querySelector('.tomorrow');
     const tomorrowIcon = document.querySelector('.tomorrow-icon');
     const twoDays = document.querySelector('.two-days');
@@ -570,19 +570,19 @@ async function getWeather(location, time, weather, temperature, feelsLike, humid
     const fifthIcon = document.querySelector('.five-icon');
 
     
-    tomorrow.innerText = `${fiveDays[7][1]}\n${(1.8 * (fiveDays[7][2] - 273) + 32).toFixed(1)}°F`;
+    tomorrow.innerText = `${capitalizeLetter(fiveDays[7][1])}\n${(1.8 * (fiveDays[7][2] - 273) + 32).toFixed(1)}°F`;
     (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(tomorrowIcon, fiveDays[7]);
 
-    twoDays.innerText = `${fiveDays[15][1]}\n${(1.8 * (fiveDays[15][2] - 273) + 32).toFixed(1)}°F`;
+    twoDays.innerText = `${capitalizeLetter(fiveDays[15][1])}\n${(1.8 * (fiveDays[15][2] - 273) + 32).toFixed(1)}°F`;
     (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(twoIcon, fiveDays[15]);
 
-    threeDays.innerText = `${fiveDays[23][1]}\n${(1.8 * (fiveDays[23][2] - 273) + 32).toFixed(1)}°F`;
+    threeDays.innerText = `${capitalizeLetter(fiveDays[23][1])}\n${(1.8 * (fiveDays[23][2] - 273) + 32).toFixed(1)}°F`;
     (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(threeIcon, fiveDays[23]);
 
-    fourDays.innerText = `${fiveDays[31][1]}\n${(1.8 * (fiveDays[31][2] - 273) + 32).toFixed(1)}°F`;
+    fourDays.innerText = `${capitalizeLetter(fiveDays[31][1])}\n${(1.8 * (fiveDays[31][2] - 273) + 32).toFixed(1)}°F`;
     (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(fourIcon, fiveDays[31]);
 
-    fifthDay.innerText = `${fiveDays[39][1]}\n${(1.8 * (fiveDays[39][2] - 273) + 32).toFixed(1)}°F`;
+    fifthDay.innerText = `${capitalizeLetter(fiveDays[39][1])}\n${(1.8 * (fiveDays[39][2] - 273) + 32).toFixed(1)}°F`;
     (0,_chooseIcon_js__WEBPACK_IMPORTED_MODULE_2__["default"])(fifthIcon, fiveDays[39]);
 }
 
@@ -702,7 +702,7 @@ function chooseIcon(day, forecast) {
             day.appendChild(partlyCloudy);
         } else if (forecast[1] === 'scattered clouds' || forecast[1] === 'mist') {
             day.appendChild(cloudy);
-        } else if (forecast[1].includes('rain') || forecast[1] === thunderstorm) {
+        } else if (forecast[1].includes('rain') || forecast[1] === 'thunderstorm') {
             day.appendChild(rain);
         } else if (forecast[1] === 'snow') {
             day.appendChild(snow);
@@ -741,6 +741,41 @@ module.exports = __webpack_require__.p + "8d849ca691d1c33dd659.svg";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "e9b7bad4e9109e54b4d5.svg";
+
+/***/ }),
+/* 22 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ changeBackground)
+/* harmony export */ });
+/* harmony import */ var _photos_sunny_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _photos_overcast_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
+// Changes the background of the website according to weather and time of day
+
+
+
+
+function changeBackground(body, weather, time) {
+    if (weather.includes('sun') || weather.includes('clear') || weather.includes('few')) {
+        body.style.backgroundImage = `url(${_photos_sunny_jpg__WEBPACK_IMPORTED_MODULE_0__})`;
+    } else if (weather.includes('scattered') || weather.includes('mist') || weather.includes('rain') || weather.includes('overcast')) {
+        body.style.backgroundImage = `url(${_photos_overcast_jpg__WEBPACK_IMPORTED_MODULE_1__})`;
+    }
+}
+
+/***/ }),
+/* 23 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "e812d252c18cc5e4f14b.jpg";
+
+/***/ }),
+/* 24 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "769de745a33dfe9d66ff.jpg";
 
 /***/ })
 /******/ 	]);
@@ -886,10 +921,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// OpenWeather API key: aaf3fe91467b4ee119231483d81d2f44
-
 const locationDisplay = document.querySelector('.location');
-const time = document.querySelector('.time');
+const time = document.querySelector('.time-updated');
+const localTime = document.querySelector('.local-time');
 const weather = document.querySelector('.weather');
 const temperature = document.querySelector('.temperature');
 const feelsLike = document.querySelector('.feels-like');

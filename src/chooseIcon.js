@@ -41,7 +41,7 @@ export default function chooseIcon(day, forecast) {
             day.appendChild(partlyCloudy);
         } else if (forecast[1] === 'scattered clouds' || forecast[1] === 'mist') {
             day.appendChild(cloudy);
-        } else if (forecast[1].includes('rain') || forecast[1] === thunderstorm) {
+        } else if (forecast[1].includes('rain') || forecast[1] === 'thunderstorm') {
             day.appendChild(rain);
         } else if (forecast[1] === 'snow') {
             day.appendChild(snow);
